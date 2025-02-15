@@ -1,4 +1,4 @@
-import Posts from "../../compoments/Posts"
+import Posts from "../components/Posts"
 
 
 
