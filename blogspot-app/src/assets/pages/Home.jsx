@@ -1,6 +1,10 @@
+import Posts from "../../compoments/Posts"
+
+
+
 const Home = () => {
 return (
-    <div>Home</div>
+    <Posts/>
 )
 }
 
