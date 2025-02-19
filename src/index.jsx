@@ -17,6 +17,7 @@ import EditPost from './pages/EditPost.jsx'
 import Logout from './pages/Logout.jsx'
 import AuthorPosts from './pages/AuthorPosts.jsx'
 
+
 const router = createBrowserRouter([
 {
 path: "/",
