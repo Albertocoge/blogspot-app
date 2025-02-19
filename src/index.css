@@ -160,7 +160,7 @@ width: 100vw;
 height: 5rem;
 display: grid;
 place-items: center;
-background: var(255, 255, 255, 0.5);
+background:rgba(255, 255, 255, 0.5);
 position: fixed;
 top:0;
 left:0;
@@ -234,7 +234,7 @@ font-weight:300;
 
 /* Posts */
 
-.posts__container {
+.posts__container, .author-posts__container, .category-posts__container {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 gap: 4rem;
@@ -319,4 +319,8 @@ overflow: hidden;
     height: fit-content;
     max-height: 30rem;
     overflow: hidden;
+}
+
+.post-detail p {
+    margin-bottom: 0.7rem;
 }
