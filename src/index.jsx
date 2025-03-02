@@ -17,17 +17,18 @@ import EditPost from './pages/EditPost.jsx'
 import Logout from './pages/Logout.jsx'
 import AuthorPosts from './pages/AuthorPosts.jsx'
 import DeletePost from './pages/DeletePost.jsx'
+import UserProvider from './context/userContext.jsx'
 
 const router = createBrowserRouter([
 {
 path: "/",
-element: <Layout/>,
+element: <UserProvider><Layout/></UserProvider>,
 errorElement: <ErrorPage/>,
 children: [
   {index: true, element:<Home/>},
   {path: "posts/:id", element: <PostDetail/>},
   {path: "register", element: <Register/>},
-  {path: "Login", element: <Login/>},
+  {path: "login", element: <Login/>},
   {path: "profile/:id", element: <UserProfile/>},
   {path: "authors", element: <Authors/>},
   {path: "create", element: <CreatePost/>},

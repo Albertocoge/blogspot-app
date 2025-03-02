@@ -608,7 +608,8 @@ gap: 1rem;
 
     /* Posts */
 
-    .post__container{
+    .posts__container{
+        
         grid-template-columns: 1fr;
         gap: 1rem;
     }
