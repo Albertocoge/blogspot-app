@@ -7,7 +7,7 @@ import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
 
 TimeAgo.addDefaultLocale(en)
-TimeAgo.addDefaultLocale(ru)
+TimeAgo.addLocale(ru)
 
 
 const PostAuthor = ({authorID, createdAt}) => {
@@ -29,7 +29,7 @@ const PostAuthor = ({authorID, createdAt}) => {
 
 
   return (
-    <Link to={`/posts/users/sdfsdf`} className="post__author">
+    <Link to={`/posts/users/${authorID}`} className="post__author">
         <div className="post__author-avatar">
             <img src={`${import.meta.env.VITE_ASSETS_URL}/uploads/${author?.avatar}`} alt=""/>
         </div>
