@@ -3,13 +3,15 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"
 import {UserContext} from '../context/userContext.jsx'
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 const CreatePost = () => {
     const [title, setTitle] = useState("");
-    const [category, setCategory] = useState("uncategorized");
+    const [category, setCategory] = useState("Uncategorized");
     const [description, setDescription] = useState("");
     const [thumbnail, setThumbnail] = useState("");
+    const [error, setError] = useState('')
     const navigate = useNavigate();
 
     const {currentUser} = useContext(UserContext)
@@ -42,14 +44,41 @@ const CreatePost = () => {
     const POST_CATEGORIES = ["Agriculture", "Business", "Education", "Entertainment", "Art", "Investment",
         "Uncategorized", "Weather"];
 
+
+    const createPost = async (e) => {
+      e.preventDefault();
+
+        // Log the category value
+  console.log("Category being sent:", category);
+
+      const postData = new FormData();
+      postData.set('title', title)
+      postData.set('category', category)
+      postData.set('description', description)
+      postData.set('thumbnail', thumbnail)
+
+    try {
+        const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/posts/`, postData, {withCredentials:true, 
+            headers: {Authorization: `Bearer ${token}`}})
+            if(response.status == 201){
+                return navigate ('/')
+            }
+    } catch (error) {
+       setError (error.response.data.message);
+    }
+
+    }
+
+
+
+
+
     return (
         <section className="create-post">
             <div className="container">
                 <h2>Create Post</h2>
-                <p className="form__error-message">
-                    This is an error message
-                </p>
-                <form className="form create-post__form">
+                {error && <p className='form__error-message'>{error}</p>}
+                <form className="form create-post__form" onSubmit={createPost}>
                     <input type="text" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} autoFocus />
                     <select name="category" value={category} onChange={e => setCategory(e.target.value)}>
                         {POST_CATEGORIES.map(cat => (
