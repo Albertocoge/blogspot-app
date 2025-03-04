@@ -23,7 +23,7 @@ const AuthorPosts = () => {
 
    }
      fetchPosts();
-  }, [])
+  }, [id])
 
   return (
     <section className='posts'>
