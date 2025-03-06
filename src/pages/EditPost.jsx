@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css";
 import { UserContext } from "../context/userContext";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
 const EditPost = () => {
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("uncategorized");
@@ -13,17 +12,14 @@ const EditPost = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
-
     const { currentUser } = useContext(UserContext);
     const token = currentUser?.token;
-
     // Redirect to login page if the user isn’t logged in
     useEffect(() => {
         if (!token) {
             navigate("/login");
         }
     }, [token, navigate]);
-
     const modules = {
         toolbar: [
             [{ header: [1, 2, 3, 4, 5, false] }],
@@ -33,17 +29,14 @@ const EditPost = () => {
             ["clean"],
         ],
     };
-
     const formats = [
         "header",
         "bold", "italic", "underline", "strike", "blockquote",
         "list", "bullet", "indent",
         "link", "image"
     ];
-
     const POST_CATEGORIES = ["Agriculture", "Business", "Education", "Entertainment", "Art", "Investment",
         "Uncategorized", "Weather"];
-
     useEffect(() => {
         const getPost = async () => {
             try {
@@ -57,16 +50,13 @@ const EditPost = () => {
         };
         getPost();
     }, [id]);
-
     const editPost = async (e) => {
         e.preventDefault();
-
         const postData = new FormData();
         postData.set("title", title);
         postData.set("category", category);
         postData.set("description", description);
         postData.set("thumbnail", thumbnail);
-
         try {
             const response = await axios.patch(`${import.meta.env.VITE_BASE_URL}/posts/${id}`, postData, {
                 withCredentials: true,
@@ -79,7 +69,6 @@ const EditPost = () => {
             setError(error.response?.data?.message || "Something went wrong");
         }
     };
-
     return (
         <section className="create-post">
             <div className="container">
@@ -106,5 +95,4 @@ const EditPost = () => {
         </section>
     );
 };
-
 export default EditPost;
